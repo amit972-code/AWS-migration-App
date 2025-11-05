@@ -1,0 +1,16 @@
+FROM node:18-bullseye
+
+WORKDIR /usr/src/app
+
+# Copy package.json & package-lock.json first
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy rest of the backend code
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]

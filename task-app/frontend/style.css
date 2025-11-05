@@ -1,0 +1,12 @@
+body{font-family:Arial,sans-serif;background:#f0f2f5;margin:0;padding:0;}
+.hidden{display:none;}
+.login-container{width:300px;margin:100px auto;padding:20px;background:white;border-radius:10px;text-align:center;box-shadow:0 4px 6px rgba(0,0,0,0.1);}
+.login-container input{width:80%;padding:10px;margin:10px 0;border-radius:5px;border:1px solid #ccc;}
+button{padding:8px 15px;margin:5px;border:none;border-radius:5px;background:#28a745;color:white;cursor:pointer;}
+button:hover{background:#218838;}
+.dashboard header{background:#007bff;color:white;padding:15px;text-align:center;}
+.card{background:white;margin:20px;padding:20px;border-radius:10px;box-shadow:0 4px 6px rgba(0,0,0,0.1);}
+ul{list-style:none;padding:0;}
+ul li{padding:8px;border-bottom:1px solid #ccc;display:flex;justify-content:space-between;align-items:center;}
+ul li button{padding:3px 8px;margin:0;background:#dc3545;color:white;}
+ul li button:hover{background:#c82333;}

@@ -1,4 +1,5 @@
-version: '3'
+version: "3.8"
+
 services:
   db:
     image: mysql:8
@@ -12,13 +13,11 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
-
-  frontend:
-    build: ./frontend
-    ports:
-      - "8080:80"
-    depends_on:
-      - backend
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     build: ./backend
@@ -27,11 +26,26 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: root123
+      DB_NAME: task_manager
+    working_dir: /usr/src/app
     volumes:
       - ./backend:/usr/src/app
-    working_dir: /usr/src/app
-    command: ["node","server.js"]
+    command: >
+      sh -c "echo 'Waiting for MySQL to be ready...' && sleep 10 && node server.js"
+
+  frontend:
+    build: ./frontend
+    container_name: task_frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
 
 volumes:
   db_data:

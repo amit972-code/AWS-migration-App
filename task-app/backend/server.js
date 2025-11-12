@@ -85,4 +85,8 @@ app.delete("/api/tasks/:taskId", (req, res) => {
   });
 });
 
+app.get("/", (req, res) => {
+  res.send("Backend API is UP and running!")
+});
+
 app.listen(3000, () => console.log("Server running on port 3000"));
